@@ -1,15 +1,14 @@
 Google Clouds managed Kubernetes - demo
 =======================================
 
-Deploy GKE using Terraform.  
+Deploy GKE using Terraform. Mind `backend.tf` settings for storing the state.  
 
-Get credentials to `kubectl` via GCP Webconsole.
+Get credentials to `kubectl` via GCP Webconsole.  
 
-Install Helm via provided `install_helm.sh` script. It will also register service account.
+Install Helm via provided `install_helm.sh` script. It will also register service account.  
 
-Deploy service `helm install --name first ./littleserver --set service.type=LoadBalancer
-`.
+Deploy service `helm install --name first ./littleserver --set service.type=LoadBalancer`.  
 
-Modify Helm chart and upgrade running service with `helm upgrade first ./littleserver/`.
+Modify Helm chart and upgrade running service with `helm upgrade first ./littleserver/`.  
 
-After playing, Terraform destroy!
+After playing, Terraform destroy!  
