@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket  = "vvc_tfstates"
+    bucket  = "bee-hypo-statefiles"
     prefix  = "terraform/state"
   }
 }
