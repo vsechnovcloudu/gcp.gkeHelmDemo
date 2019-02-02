@@ -1,7 +1,7 @@
 resource "google_container_cluster" "primary" {
-  name               = "davesade"
-  zone               = "europe-west2-a"
-  initial_node_count = 1
+  name               = "superden"
+  zone               = "europe-west3-a"
+  initial_node_count = "${var.nodecount}"
 
   master_auth {
     username = ""
@@ -24,15 +24,17 @@ resource "google_container_cluster" "primary" {
   }
 }
 
-# The following outputs allow authentication and connectivity to the GKE Cluster.
-output "client_certificate" {
-  value = "${google_container_cluster.primary.master_auth.0.client_certificate}"
+resource "google_sql_database_instance" "primary" {
+  name = "bee-hypo-db-${terraform.workspace}"
+
+  settings {
+    tier = "db-f1-micro"
+  }
 }
 
-output "client_key" {
-  value = "${google_container_cluster.primary.master_auth.0.client_key}"
-}
-
-output "cluster_ca_certificate" {
-  value = "${google_container_cluster.primary.master_auth.0.cluster_ca_certificate}"
+resource "google_sql_database" "users" {
+  name      = "users-db"
+  instance  = "${google_sql_database_instance.primary.name}"
+  charset   = "latin1"
+  collation = "latin1_swedish_ci"
 }
